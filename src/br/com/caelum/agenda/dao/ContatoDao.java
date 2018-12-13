@@ -19,7 +19,9 @@ public class ContatoDao {
 		try {
 			this.connection = new ConnectionFactory().getConnection();
 		} catch (SQLException e) {
+			System.out.println("Falha ao conectar com a base de dados");
 			throw new RuntimeException(e);
+
 		}
 	}
 

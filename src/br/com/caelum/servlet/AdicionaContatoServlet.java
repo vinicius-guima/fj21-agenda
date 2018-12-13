@@ -2,6 +2,7 @@ package br.com.caelum.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.caelum.agenda.dao.ContatoDao;
 import br.com.caelum.agenda.modelo.Contato;
 
-@WebServlet("/adiciona-contato")
+@WebServlet("/adicionaContato")
 public class AdicionaContatoServlet extends HttpServlet {
 
 	@Override
@@ -29,13 +30,15 @@ public class AdicionaContatoServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String dataEmTexto = request.getParameter("dataNascimento");
 		Calendar dataNascimento = null;
+		
 		try {
 			Date date = 
 					new SimpleDateFormat("dd/MM/yyyy").parse(dataEmTexto);
 			dataNascimento = Calendar.getInstance();
 			dataNascimento.setTime(date);
-		} catch (Exception e) {
+		} catch (ParseException e) {
 			out.println("Erro de conversão de data");
+			return;
 		}
 		
 		Contato contato = new Contato();
@@ -45,7 +48,7 @@ public class AdicionaContatoServlet extends HttpServlet {
 		contato.setDataNascimento(dataNascimento);
 		
 		ContatoDao dao = new ContatoDao();
-		dao.atualiza(contato);
+		dao.adiciona(contato);
 		
 		out.println("<html>");
 		out.println("<body>");
