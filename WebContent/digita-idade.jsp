@@ -11,7 +11,7 @@
 	
 	<form action="mostra-idade.jsp">
 		Idade: <input type="text" name="idade"/>
-		<input type="submit"/>
+		<input type="submit" value="Enviar parametro"/>
 	</form>
 </body>
 </html>
