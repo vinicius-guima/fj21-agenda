@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="C"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -9,6 +10,8 @@
 <title>lista-contatos</title>
 </head>
 <body>
+
+<C:import url="cabecalho.jsp"></C:import>
 
 	<!-- Cria o dao -->
 	<jsp:useBean id="dao" class="br.com.caelum.agenda.dao.ContatoDao" />
@@ -37,9 +40,13 @@
 				 	</C:if>
 				</td>
 				<td>${contato.endereco}</td>
-				<td>${contato.dataNascimento.time}</td>
+				<td>
+					<fmt:formatDate value="${contato.dataNascimento.time}" pattern="dd/MM/yyyy"/>
+				</td>
 			</tr>
 		</C:forEach>
 	</table>
+	
+	<C:import url="rodape.jsp"></C:import>
 </body>
 </html>
